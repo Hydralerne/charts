@@ -86,7 +86,9 @@ export type { LineSeriesOption } from './LineChart';
 export type { PieSeriesOption } from './PieChart';
 export type { ScatterSeriesOption } from './ScatterChart';
 export type { RadarSeriesOption } from './RadarChart';
+export type { PieSeriesOption as NightingaleSeriesOption } from './NightingaleChart';
 export type { GaugeSeriesOption } from './GaugeChart';
+export type { GaugeSeriesOption as GradeGaugeSeriesOption } from './GradeGaugeChart';
 export type { FunnelSeriesOption } from './FunnelChart';
 export type { HeatmapSeriesOption } from './HeatmapChart';
 export type { CandlestickSeriesOption } from './CandlestickChart';
@@ -109,6 +111,7 @@ export { default as createLineChart } from './LineChart';
 export { default as createAreaChart } from './AreaChart';
 export { default as createPieChart } from './PieChart';
 export { default as createDonutChart } from './DonutChart';
+export { default as createNightingaleChart } from './NightingaleChart';
 export { default as createDateChart } from './DateChart';
 export { default as createStackedBarChart } from './StackedBarChart';
 export { default as createStackedColumnChart } from './StackedColumnChart';
@@ -127,6 +130,7 @@ export { default as createParallelChart } from './ParallelChart';
 export { default as createCandlestickChart } from './CandlestickChart';
 export { default as createFunnelChart } from './FunnelChart';
 export { default as createGaugeChart } from './GaugeChart';
+export { default as createGradeGaugeChart } from './GradeGaugeChart';
 export { default as createWaterfallChart } from './WaterfallChart';
 export { default as createComboChart } from './ComboChart';
 export { default as createDualAxisChart } from './DualAxisChart';
@@ -144,6 +148,7 @@ import createLineChart from './LineChart';
 import createAreaChart from './AreaChart';
 import createPieChart from './PieChart';
 import createDonutChart from './DonutChart';
+import createNightingaleChart from './NightingaleChart';
 import createDateChart from './DateChart';
 import createStackedBarChart from './StackedBarChart';
 import createStackedColumnChart from './StackedColumnChart';
@@ -162,6 +167,7 @@ import createParallelChart from './ParallelChart';
 import createCandlestickChart from './CandlestickChart';
 import createFunnelChart from './FunnelChart';
 import createGaugeChart from './GaugeChart';
+import createGradeGaugeChart from './GradeGaugeChart';
 import createWaterfallChart from './WaterfallChart';
 import createComboChart from './ComboChart';
 import createDualAxisChart from './DualAxisChart';
@@ -179,6 +185,7 @@ export const charts: Record<ChartType, ChartCreator> = {
   area: createAreaChart,
   pie: createPieChart,
   donut: createDonutChart,
+  nightingale: createNightingaleChart,
   date: createDateChart,
   stackedBar: createStackedBarChart,
   stackedColumn: createStackedColumnChart,
@@ -197,6 +204,7 @@ export const charts: Record<ChartType, ChartCreator> = {
   candlestick: createCandlestickChart,
   funnel: createFunnelChart,
   gauge: createGaugeChart,
+  gradeGauge: createGradeGaugeChart,
   waterfall: createWaterfallChart,
   combo: createComboChart,
   dualAxis: createDualAxisChart,

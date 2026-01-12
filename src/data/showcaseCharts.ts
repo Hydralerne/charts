@@ -21,6 +21,7 @@ export const showcaseCharts: ShowcaseChart[] = [
   { type: 'area', dataKey: 'dates', numberFormat: 'comma', timeXAxis: true },
   { type: 'pie', dataKey: 'products' },
   { type: 'donut', dataKey: 'products' },
+  { type: 'nightingale', dataKey: 'products' },
   { type: 'scatter', dataKey: 'default' },
   { type: 'bubble', dataKey: 'default' },
   { type: 'radar', dataKey: 'metrics' },
@@ -38,4 +39,5 @@ export const showcaseCharts: ShowcaseChart[] = [
   { type: 'combo', dataKey: 'months' },
   { type: 'dualAxis', dataKey: 'months' },
   { type: 'gauge', dataKey: 'gauge' },
+  { type: 'gradeGauge', dataKey: 'gradeGauge' },
 ];

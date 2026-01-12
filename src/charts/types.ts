@@ -152,6 +152,7 @@ export type ChartType =
   // Circular
   | 'sunburst'
   | 'radar'
+  | 'nightingale'
   
   // Hierarchical
   | 'treemap'
@@ -169,6 +170,7 @@ export type ChartType =
   | 'candlestick'
   | 'funnel'
   | 'gauge'
+  | 'gradeGauge'
   | 'waterfall'
   
   // Combo

@@ -34,6 +34,11 @@ export const chartData = {
     values: [78],
   },
   
+  gradeGauge: {
+    labels: ['Grade Rating'],
+    values: [0.7],
+  },
+  
   worldMap: {
     labels: ['United States', 'China', 'Brazil', 'India', 'Russia', 'Australia', 'Canada', 'Germany', 'Japan', 'United Kingdom'],
     values: [331, 1444, 214, 1393, 146, 26, 38, 84, 125, 68],
