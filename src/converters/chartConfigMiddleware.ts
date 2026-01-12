@@ -1,10 +1,12 @@
 import type { EChartsOption } from 'echarts';
 import { createNumberFormatter, type NumberFormat } from './numberConverter';
+import { createTimeAxisFormatter } from './dateConverter';
 
 export type ChartConfigMiddleware = (
   config: EChartsOption,
   chartType: string,
   rawData: any
+  
 ) => EChartsOption;
 
 export interface ChartConfigOptions {
@@ -76,16 +78,41 @@ export const applyConfigMiddleware = (
   }
   
   if (hasTimeAxis && rawData?.labels && rawData?.values) {
+    // Create date formatter based on the actual data
+    const dateFormatter = createTimeAxisFormatter(rawData.labels);
+    
     // Handle X-axis as time
     if (middlewareConfig?.timeXAxis && config.xAxis) {
       (config.xAxis as any).type = 'time';
       delete (config.xAxis as any).data;
+      
+      // Apply date formatter to show dates like "1 Jan 2026", "2 Mar"
+      (config.xAxis as any).axisLabel = {
+        ...(config.xAxis as any).axisLabel,
+        formatter: dateFormatter,
+        hideOverlap: true, // Prevent overlapping labels
+        rotate: 0,
+      };
+      
+      // Control spacing and intervals
+      (config.xAxis as any).splitNumber = 10;
+      (config.xAxis as any).minInterval = 3600 * 1000 * 24; // Minimum 1 day
     }
     
     // Handle Y-axis as time
     if (middlewareConfig?.timeYAxis && config.yAxis) {
       (config.yAxis as any).type = 'time';
       delete (config.yAxis as any).data;
+      
+      // Apply date formatter to Y-axis
+      (config.yAxis as any).axisLabel = {
+        ...(config.yAxis as any).axisLabel,
+        formatter: dateFormatter,
+        hideOverlap: true,
+      };
+      
+      (config.yAxis as any).splitNumber = 10;
+      (config.yAxis as any).minInterval = 3600 * 1000 * 24; // Minimum 1 day
     }
     
     // Transform series data to appropriate format
