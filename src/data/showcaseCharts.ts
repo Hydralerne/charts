@@ -11,16 +11,13 @@ export interface ShowcaseChart {
 }
 
 export const showcaseCharts: ShowcaseChart[] = [
-  { type: 'date', dataKey: 'dates' },
-  { type: 'line', dataKey: 'dates' },
-  { type: 'bar', dataKey: 'datesMonthly' },
-  { type: 'area', dataKey: 'dates' },
+  { type: 'stackedBar', dataKey: 'sales', numberFormat: 'abbreviated' },
+  { type: 'line', dataKey: 'months', timeXAxis: true },
   { type: 'map', dataKey: 'worldMap' },
   { type: 'pieMap', dataKey: 'cityMap' },
   { type: 'bar', dataKey: 'products' },
   { type: 'column', dataKey: 'sales' },
   { type: 'scatterMap', dataKey: 'cityMap' },
-  { type: 'line', dataKey: 'months', timeXAxis: true },
   { type: 'area', dataKey: 'months', numberFormat: 'comma' },
   { type: 'pie', dataKey: 'products' },
   { type: 'donut', dataKey: 'products' },
@@ -30,7 +27,6 @@ export const showcaseCharts: ShowcaseChart[] = [
   { type: 'heatmap', dataKey: 'default' },
   { type: 'boxplot', dataKey: 'default' },
   { type: 'parallel', dataKey: 'default' },
-  { type: 'stackedBar', dataKey: 'sales', numberFormat: 'abbreviated' },
   { type: 'stackedColumn', dataKey: 'sales', numberFormat: 'comma', decimalPlaces: 0 },
   { type: 'stackedArea', dataKey: 'months' },
   { type: 'stackedLine', dataKey: 'months' },
