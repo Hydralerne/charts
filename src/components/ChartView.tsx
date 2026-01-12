@@ -1,7 +1,16 @@
+import { useEffect, useState, useMemo } from 'react';
 import ReactECharts from 'echarts-for-react';
 import type { EChartsOption } from 'echarts';
 import type { ChartType, ChartData, AnimationType, ThemeType } from '../charts';
-import { charts, animations, themes } from '../charts';
+import { 
+  charts, 
+  animations, 
+  themes,
+  requiresInitialization,
+  initializeChart,
+  getLoadingMessage,
+} from '../charts';
+import { convertChartData } from '../charts/converters';
 
 export interface ChartViewProps {
   /** Chart type - defaults to 'bar' */
@@ -57,6 +66,28 @@ function ChartView({
   style,
   className,
 }: ChartViewProps) {
+  const [isReady, setIsReady] = useState(!requiresInitialization(type));
+  const [error, setError] = useState<string | null>(null);
+
+  // Initialize chart type dynamically if needed
+  useEffect(() => {
+    if (requiresInitialization(type)) {
+      setIsReady(false);
+      setError(null);
+      
+      initializeChart(type)
+        .then(() => setIsReady(true))
+        .catch((err) => {
+          console.error(`Chart initialization failed for type "${type}":`, err);
+          setError(`Failed to load ${type} chart`);
+          setIsReady(true); // Still set ready to show error state
+        });
+    } else {
+      setIsReady(true);
+      setError(null);
+    }
+  }, [type]);
+
   // Get animation config
   const animationConfig = typeof animation === 'string' 
     ? animations[animation] 
@@ -65,8 +96,67 @@ function ChartView({
   // Get theme config
   const themeConfig = themes[theme];
 
-  // Create base chart option
-  const baseOption = charts[type](data);
+  // Auto-convert data if needed (e.g., timestamps to dates)
+  const convertedData = useMemo(() => {
+    return convertChartData(type, data);
+  }, [type, data]);
+
+  // Show loading state while initializing
+  if (!isReady) {
+    return (
+      <div 
+        style={{ 
+          height: 400, 
+          width: '100%', 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center',
+          ...style 
+        }}
+        className={className}
+      >
+        <div style={{ 
+          color: theme === 'dark' ? '#888' : '#666',
+          textAlign: 'center',
+        }}>
+          <div style={{ marginBottom: 8 }}>
+            {requiresInitialization(type) ? getLoadingMessage(type) : 'Loading...'}
+          </div>
+          <div style={{ fontSize: 12, opacity: 0.7 }}>Please wait...</div>
+        </div>
+      </div>
+    );
+  }
+
+  // Show error state if initialization failed
+  if (error) {
+    return (
+      <div 
+        style={{ 
+          height: 400, 
+          width: '100%', 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center',
+          ...style 
+        }}
+        className={className}
+      >
+        <div style={{ 
+          color: theme === 'dark' ? '#ef4444' : '#dc2626',
+          textAlign: 'center',
+        }}>
+          <div style={{ marginBottom: 8, fontWeight: 500 }}>⚠️ {error}</div>
+          <div style={{ fontSize: 12, opacity: 0.7 }}>
+            Check console for details
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Create base chart option with converted data
+  const baseOption = charts[type](convertedData);
 
   // Merge: base → animation → theme → user options
   const chartOption: EChartsOption = {

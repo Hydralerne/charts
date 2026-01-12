@@ -2,10 +2,30 @@ import type { EChartsOption } from 'echarts';
 
 /**
  * Simple data format for charts
+ * 
+ * Labels can be any type (strings, numbers, dates, timestamps)
+ * The data converter middleware will transform them as needed
  */
 export interface ChartData {
-  labels: string[];
+  labels: any[];  // Flexible: strings, numbers (timestamps), Date objects, etc.
   values: number[];
+}
+
+/**
+ * Extended data format for geographic/map charts
+ */
+export interface MapChartData {
+  regions: string[];  // Region names (e.g., country names, state names)
+  values: number[];   // Values for each region
+}
+
+/**
+ * Time series data format for date-based charts
+ */
+export interface TimeSeriesData {
+  dates: string[];    // ISO date strings or formatted dates
+  values: number[];   // Values for each date
+  labels?: string[];  // Optional labels for multi-series
 }
 
 /**
@@ -100,7 +120,7 @@ export type ThemeType = keyof typeof themes;
  * Chart creator signature
  */
 export type ChartCreator = (
-  data: ChartData,
+  data: ChartData | any,  // Allow flexible data for special charts
   option?: Partial<EChartsOption>
 ) => EChartsOption;
 
@@ -115,6 +135,9 @@ export type ChartType =
   | 'area'
   | 'pie'
   | 'donut'
+  
+  // Date-based
+  | 'date'
   
   // Stacked variants
   | 'stackedBar'
@@ -152,8 +175,11 @@ export type ChartType =
   | 'combo'
   | 'dualAxis'
   
-  // Geographic
-  | 'map'
+  // Geographic (Maps)
+  | 'map'              // Choropleth map (regions colored by value)
+  | 'scatterMap'       // Single bubble per location
+  | 'pieMap'           // Real pie charts at locations (coordinateSystem: 'geo')
+  | 'linesMap'         // Flow/migration lines between locations
   
   // Advanced
   | 'themeRiver'

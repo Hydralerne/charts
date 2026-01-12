@@ -31,33 +31,78 @@ const chartData: Record<string, { labels: string[]; values: number[] }> = {
     labels: ['Performance'],
     values: [78],
   },
+  worldMap: {
+    labels: ['United States', 'China', 'Brazil', 'India', 'Russia', 'Australia', 'Canada', 'Germany', 'Japan', 'United Kingdom'],
+    values: [331, 1444, 214, 1393, 146, 26, 38, 84, 125, 68],
+  },
+  cityMap: {
+    labels: ['Paris', 'Sydney', 'Dubai', 'Toronto'],
+    values: [2200, 5300, 3400, 2900],
+  },
+  dates: {
+    // Using timestamps (will be auto-converted)
+    labels: [
+      '2026-01-10', // ISO string
+      '2026-01-11', // 2026-01-11 
+      '2026-01-12', // ISO string
+      '2026-01-13', // ISO string
+      '2026-01-14', // ISO string
+      '2026-01-15', // ISO string
+      '2026-01-16', // ISO string
+      '2026-01-17', // ISO string
+    ],
+    values: [820, 932, 901, 934, 1290, 1330, 1320, 1420],
+  },
 };
 
 const showcaseCharts: Array<{ type: ChartType; dataKey: string }> = [
+  // Date & Time
+  { type: 'date', dataKey: 'dates' },
+
+  // Maps (Geographic) - All use STANDARD ChartData format
+  { type: 'map', dataKey: 'worldMap' },           // Choropleth (colored regions)
+  { type: 'pieMap', dataKey: 'cityMap' },         // REAL pie charts (with slices!)
+
+  // Basic Charts
   { type: 'bar', dataKey: 'products' },
   { type: 'column', dataKey: 'sales' },
+  { type: 'scatterMap', dataKey: 'cityMap' },     // Single bubble per location
   { type: 'line', dataKey: 'months' },
   { type: 'area', dataKey: 'months' },
   { type: 'pie', dataKey: 'products' },
   { type: 'donut', dataKey: 'products' },
+
+  // Scatter & Bubble
   { type: 'scatter', dataKey: 'default' },
   { type: 'bubble', dataKey: 'default' },
+
+  // Circular & Radar
   { type: 'radar', dataKey: 'metrics' },
-  { type: 'gauge', dataKey: 'gauge' },
-  { type: 'funnel', dataKey: 'products' },
+
+  // Statistical
   { type: 'heatmap', dataKey: 'default' },
+  { type: 'boxplot', dataKey: 'default' },
+  { type: 'parallel', dataKey: 'default' },
+
+  // Stacked
   { type: 'stackedBar', dataKey: 'sales' },
   { type: 'stackedColumn', dataKey: 'sales' },
   { type: 'stackedArea', dataKey: 'months' },
   { type: 'stackedLine', dataKey: 'months' },
+
+  // Business
+  { type: 'funnel', dataKey: 'products' },
   { type: 'waterfall', dataKey: 'waterfall' },
   { type: 'candlestick', dataKey: 'default' },
+
+  // Hierarchical
   { type: 'treemap', dataKey: 'products' },
   { type: 'sunburst', dataKey: 'products' },
-  { type: 'boxplot', dataKey: 'default' },
+
+  // Combo
   { type: 'combo', dataKey: 'months' },
   { type: 'dualAxis', dataKey: 'months' },
-  { type: 'parallel', dataKey: 'default' },
+  { type: 'gauge', dataKey: 'gauge' },
 ];
 
 type LayoutType = 'grid' | 'list' | 'compact' | 'masonry';
@@ -129,7 +174,7 @@ function App() {
 
   const getCardClasses = () => {
     const base = `rounded-2xl overflow-hidden transition-all duration-200 ${isDark ? 'bg-zinc-900 border border-zinc-800 hover:border-zinc-600' : 'bg-white border border-zinc-200 hover:border-zinc-400'} hover:shadow-xl`;
-    
+
     switch (layout) {
       case 'list':
         return `${base} flex flex-row items-center`;
@@ -189,7 +234,7 @@ function App() {
                       : isDark
                         ? 'text-zinc-500 hover:text-zinc-300'
                         : 'text-zinc-400 hover:text-zinc-600'
-                    }`}
+                      }`}
                   >
                     {l.icon}
                   </button>

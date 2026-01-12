@@ -8,9 +8,78 @@ export type {
   ChartMetadata,
   AnimationType,
   ThemeType,
+  TimeSeriesData,
 } from './types';
 export { chartCategories, defaultAnimation, animations, themes } from './types';
 export type { EChartsOption } from 'echarts';
+
+// ============================================
+// Chart Initialization System
+// ============================================
+export {
+  requiresInitialization,
+  isChartInitialized,
+  initializeChart,
+  initializeAllCharts,
+  getLoadingMessage,
+  resetInitialization,
+} from './chartInitializer';
+export type { InitializableChartType } from './chartInitializer';
+
+// ============================================
+// Data Converters (Clean folder structure)
+// ============================================
+export {
+  // Converter functions
+  convertChartData,
+  registerConverter,
+  hasConverter,
+  
+  // Individual middlewares
+  dateConverterMiddleware,
+  pieMapConverterMiddleware,
+} from './converters';
+
+export type {
+  DataMiddleware,
+  DataConverterConfig,
+} from './converters';
+
+// ============================================
+// Map Utilities & Data Types
+// ============================================
+export {
+  registerSimpleWorldMap,
+  registerMapFromGeoJSON,
+  registerMapFromURL,
+  initializeMaps,
+  ensureMapsInitialized,
+  isMapInitialized,
+  loadMap,
+  mapURLs,
+} from './utils/mapUtils';
+export type { MapType } from './utils/mapUtils';
+
+export {
+  normalizeCoordinate,
+  toEChartsCoord,
+  isCoordinate,
+  isArrayCoordinate,
+  resolveLocation,
+  locationToCoordinate,
+  convertToMapData,
+  mapDataToEChartsSeries,
+  registerCity,
+  registerCountry,
+  CITY_COORDINATES,
+  COUNTRY_CENTERS,
+} from './utils/mapDataTypes';
+export type {
+  GeoCoordinate,
+  GeoLocation,
+  MapDataPoint,
+  MapChartData,
+} from './utils/mapDataTypes';
 
 // ============================================
 // Series Option Types
@@ -46,6 +115,7 @@ export { default as createLineChart } from './LineChart';
 export { default as createAreaChart } from './AreaChart';
 export { default as createPieChart } from './PieChart';
 export { default as createDonutChart } from './DonutChart';
+export { default as createDateChart } from './DateChart';
 export { default as createStackedBarChart } from './StackedBarChart';
 export { default as createStackedColumnChart } from './StackedColumnChart';
 export { default as createStackedLineChart } from './StackedLineChart';
@@ -67,6 +137,9 @@ export { default as createWaterfallChart } from './WaterfallChart';
 export { default as createComboChart } from './ComboChart';
 export { default as createDualAxisChart } from './DualAxisChart';
 export { default as createMapChart } from './MapChart';
+export { default as createScatterMapChart } from './ScatterMapChart';
+export { default as createPieMapChart } from './PieMapChart';
+export { default as createLinesMapChart } from './LinesMapChart';
 export { default as createThemeRiverChart } from './ThemeRiverChart';
 export { default as createCustomChart } from './CustomChart';
 
@@ -80,6 +153,7 @@ import createLineChart from './LineChart';
 import createAreaChart from './AreaChart';
 import createPieChart from './PieChart';
 import createDonutChart from './DonutChart';
+import createDateChart from './DateChart';
 import createStackedBarChart from './StackedBarChart';
 import createStackedColumnChart from './StackedColumnChart';
 import createStackedLineChart from './StackedLineChart';
@@ -101,6 +175,9 @@ import createWaterfallChart from './WaterfallChart';
 import createComboChart from './ComboChart';
 import createDualAxisChart from './DualAxisChart';
 import createMapChart from './MapChart';
+import createScatterMapChart from './ScatterMapChart';
+import createPieMapChart from './PieMapChart';
+import createLinesMapChart from './LinesMapChart';
 import createThemeRiverChart from './ThemeRiverChart';
 import createCustomChart from './CustomChart';
 
@@ -111,6 +188,7 @@ export const charts: Record<ChartType, ChartCreator> = {
   area: createAreaChart,
   pie: createPieChart,
   donut: createDonutChart,
+  date: createDateChart,
   stackedBar: createStackedBarChart,
   stackedColumn: createStackedColumnChart,
   stackedLine: createStackedLineChart,
@@ -132,6 +210,9 @@ export const charts: Record<ChartType, ChartCreator> = {
   combo: createComboChart,
   dualAxis: createDualAxisChart,
   map: createMapChart,
+  scatterMap: createScatterMapChart,
+  pieMap: createPieMapChart,
+  linesMap: createLinesMapChart as any,  // Special data format (routes)
   themeRiver: createThemeRiverChart,
   custom: createCustomChart,
 };
