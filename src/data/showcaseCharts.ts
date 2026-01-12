@@ -18,7 +18,7 @@ export const showcaseCharts: ShowcaseChart[] = [
   { type: 'bar', dataKey: 'products' },
   { type: 'column', dataKey: 'sales' },
   { type: 'scatterMap', dataKey: 'cityMap' },
-  { type: 'area', dataKey: 'months', numberFormat: 'comma' },
+  { type: 'area', dataKey: 'months', numberFormat: 'comma', timeYAxis: true },
   { type: 'pie', dataKey: 'products' },
   { type: 'donut', dataKey: 'products' },
   { type: 'scatter', dataKey: 'default' },
