@@ -10,5 +10,6 @@ export default defineConfig({
   build: {
     outDir: './dist',
     emptyOutDir: true,
+    cssMinify: 'esbuild', // or false if you want zero risk 
   }
 })
