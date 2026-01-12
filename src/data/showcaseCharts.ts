@@ -12,13 +12,13 @@ export interface ShowcaseChart {
 
 export const showcaseCharts: ShowcaseChart[] = [
   { type: 'stackedBar', dataKey: 'sales', numberFormat: 'abbreviated' },
-  { type: 'line', dataKey: 'months', timeXAxis: true },
+  { type: 'line', dataKey: 'dates', timeXAxis: true },
   { type: 'map', dataKey: 'worldMap' },
   { type: 'pieMap', dataKey: 'cityMap' },
   { type: 'bar', dataKey: 'products' },
   { type: 'column', dataKey: 'sales' },
   { type: 'scatterMap', dataKey: 'cityMap' },
-  { type: 'area', dataKey: 'months', numberFormat: 'comma', timeYAxis: true },
+  { type: 'area', dataKey: 'dates', numberFormat: 'comma', timeXAxis: true },
   { type: 'pie', dataKey: 'products' },
   { type: 'donut', dataKey: 'products' },
   { type: 'scatter', dataKey: 'default' },
