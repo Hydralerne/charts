@@ -11,7 +11,7 @@ import { ensureMapsInitialized } from '../utils/mapUtils';
 /**
  * Chart types that require initialization before rendering
  */
-export type InitializableChartType = 'map' | 'scatterMap' | 'pieMap' | 'linesMap';
+export type InitializableChartType = 'map' | 'scatterMap' | 'pieMap' | 'linesMap' | 'bar3D';
 
 /**
  * Configuration for chart initialization
@@ -22,6 +22,19 @@ interface ChartInitConfig {
   /** Loading message to display */
   loadingMessage: string;
 }
+
+/**
+ * Initialize echarts-gl for 3D charts
+ */
+const initializeEChartsGL = async (): Promise<void> => {
+  try {
+    // Dynamically import echarts-gl
+    await import('echarts-gl');
+  } catch (error) {
+    console.error('Failed to load echarts-gl:', error);
+    throw new Error('echarts-gl is required for 3D charts. Please install it: npm install echarts-gl');
+  }
+};
 
 /**
  * Registry of chart types that need initialization
@@ -42,6 +55,10 @@ const CHART_INIT_REGISTRY: Partial<Record<InitializableChartType, ChartInitConfi
   linesMap: {
     init: ensureMapsInitialized,
     loadingMessage: 'Loading map data...',
+  },
+  bar3D: {
+    init: initializeEChartsGL,
+    loadingMessage: 'Loading 3D rendering engine...',
   },
 };
 

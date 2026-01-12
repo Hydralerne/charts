@@ -185,7 +185,10 @@ export type ChartType =
   
   // Advanced
   | 'themeRiver'
-  | 'custom';
+  | 'custom'
+  
+  // 3D Charts (requires echarts-gl)
+  | 'bar3D';
 /**
  * Chart metadata for documentation
  */

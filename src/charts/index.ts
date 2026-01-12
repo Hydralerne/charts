@@ -104,6 +104,7 @@ export type { ParallelSeriesOption } from './ParallelChart';
 export type { MapSeriesOption } from './MapChart';
 export type { ThemeRiverSeriesOption } from './ThemeRiverChart';
 export type { CustomSeriesOption } from './CustomChart';
+export type { Bar3DSeriesOption } from './Bar3DChart';
 
 export { default as createBarChart } from './BarChart';
 export { default as createColumnChart } from './ColumnChart';
@@ -140,6 +141,7 @@ export { default as createPieMapChart } from './PieMapChart';
 export { default as createLinesMapChart } from './LinesMapChart';
 export { default as createThemeRiverChart } from './ThemeRiverChart';
 export { default as createCustomChart } from './CustomChart';
+export { default as createBar3DChart } from './Bar3DChart';
 
 import type { ChartType, ChartCreator } from './types';
 import createBarChart from './BarChart';
@@ -177,6 +179,7 @@ import createPieMapChart from './PieMapChart';
 import createLinesMapChart from './LinesMapChart';
 import createThemeRiverChart from './ThemeRiverChart';
 import createCustomChart from './CustomChart';
+import createBar3DChart from './Bar3DChart';
 
 export const charts: Record<ChartType, ChartCreator> = {
   bar: createBarChart,
@@ -214,6 +217,7 @@ export const charts: Record<ChartType, ChartCreator> = {
   linesMap: createLinesMapChart as any,  // Special data format (routes)
   themeRiver: createThemeRiverChart,
   custom: createCustomChart,
+  bar3D: createBar3DChart,
 };
 
 export { default } from './BarChart';

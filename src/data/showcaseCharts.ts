@@ -40,4 +40,5 @@ export const showcaseCharts: ShowcaseChart[] = [
   { type: 'dualAxis', dataKey: 'months' },
   { type: 'gauge', dataKey: 'gauge' },
   { type: 'gradeGauge', dataKey: 'gradeGauge' },
+  { type: 'bar3D', dataKey: 'products' },
 ];
