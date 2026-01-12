@@ -6,7 +6,7 @@
  */
 
 import type { ChartType } from './types';
-import { ensureMapsInitialized } from './utils/mapUtils';
+import { ensureMapsInitialized } from '../utils/mapUtils';
 
 /**
  * Chart types that require initialization before rendering

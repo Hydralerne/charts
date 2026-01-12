@@ -1,7 +1,7 @@
 import type { EChartsOption } from 'echarts';
 import type { ChartData } from './types';
 import { defaultAnimation } from './types';
-import { convertToMapData, mapDataToEChartsSeries } from './utils/mapDataTypes';
+import { convertToMapData, mapDataToEChartsSeries } from '../utils/mapDataTypes';
 
 /**
  * Creates a scatter map chart

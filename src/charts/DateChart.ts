@@ -2,20 +2,6 @@ import type { EChartsOption } from 'echarts';
 import type { ChartData } from './types';
 import { defaultAnimation } from './types';
 
-/**
- * Creates a date-based line chart with proper date formatting
- * 
- * Automatically converts timestamps, Date objects, or date strings to formatted labels
- * Format: "13/1/2026", "14/1/2026", etc.
- * 
- * Input data can be:
- * - Unix timestamps (milliseconds or seconds)
- * - JavaScript Date objects
- * - ISO date strings
- * - Any parseable date format
- * 
- * The data converter automatically handles conversion before rendering.
- */
 const createDateChart = (
   data: ChartData,
   option?: Partial<EChartsOption>
@@ -23,7 +9,7 @@ const createDateChart = (
   return {
     ...defaultAnimation,
     title: {
-      text: 'Date-Based Chart',
+      text: 'Time Series',
       left: 'center',
     },
     tooltip: {
@@ -31,29 +17,12 @@ const createDateChart = (
       axisPointer: {
         type: 'cross',
       },
-      formatter: (params: any) => {
-        if (Array.isArray(params) && params.length > 0) {
-          const param = params[0];
-          return `${param.name}<br/>${param.seriesName}: ${param.value}`;
-        }
-        return '';
-      },
     },
     xAxis: {
-      type: 'category',
-      data: data.labels,
-      boundaryGap: false,
-      axisLabel: {
-        rotate: 45,
-        fontSize: 11,
-        formatter: (value: string) => value,
-      },
+      type: 'time',
     },
     yAxis: {
       type: 'value',
-      axisLabel: {
-        formatter: '{value}',
-      },
     },
     grid: {
       left: '5%',
@@ -62,11 +31,24 @@ const createDateChart = (
       top: '15%',
       containLabel: true,
     },
+    dataZoom: [
+      {
+        type: 'inside',
+        start: 0,
+        end: 100,
+      },
+      {
+        type: 'slider',
+        start: 0,
+        end: 100,
+        height: 20,
+      },
+    ],
     series: [
       {
         name: 'Value',
         type: 'line',
-        data: data.values,
+        data: data.labels.map((label, i) => [label, data.values[i]]),
         smooth: true,
         symbol: 'circle',
         symbolSize: 6,

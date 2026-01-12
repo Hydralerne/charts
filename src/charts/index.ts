@@ -13,9 +13,6 @@ export type {
 export { chartCategories, defaultAnimation, animations, themes } from './types';
 export type { EChartsOption } from 'echarts';
 
-// ============================================
-// Chart Initialization System
-// ============================================
 export {
   requiresInitialization,
   isChartInitialized,
@@ -26,28 +23,31 @@ export {
 } from './chartInitializer';
 export type { InitializableChartType } from './chartInitializer';
 
-// ============================================
-// Data Converters (Clean folder structure)
-// ============================================
 export {
-  // Converter functions
   convertChartData,
   registerConverter,
   hasConverter,
-  
-  // Individual middlewares
   dateConverterMiddleware,
   pieMapConverterMiddleware,
-} from './converters';
+  getConverterOptions,
+  setConverterOptions,
+  resetConverterOptions,
+  shouldConvertDates,
+  shouldConvertGeo,
+  applyConfigMiddleware,
+  registerConfigMiddleware,
+  getCustomProps,
+  hasConfigMiddleware,
+} from '../converters';
 
 export type {
   DataMiddleware,
   DataConverterConfig,
-} from './converters';
+  ConverterOptions,
+  ChartConfigMiddleware,
+  ChartConfigOptions,
+} from '../converters';
 
-// ============================================
-// Map Utilities & Data Types
-// ============================================
 export {
   registerSimpleWorldMap,
   registerMapFromGeoJSON,
@@ -57,8 +57,8 @@ export {
   isMapInitialized,
   loadMap,
   mapURLs,
-} from './utils/mapUtils';
-export type { MapType } from './utils/mapUtils';
+} from '../utils/mapUtils';
+export type { MapType } from '../utils/mapUtils';
 
 export {
   normalizeCoordinate,
@@ -73,17 +73,14 @@ export {
   registerCountry,
   CITY_COORDINATES,
   COUNTRY_CENTERS,
-} from './utils/mapDataTypes';
+} from '../utils/mapDataTypes';
 export type {
   GeoCoordinate,
   GeoLocation,
   MapDataPoint,
   MapChartData,
-} from './utils/mapDataTypes';
+} from '../utils/mapDataTypes';
 
-// ============================================
-// Series Option Types
-// ============================================
 export type { BarSeriesOption } from './BarChart';
 export type { LineSeriesOption } from './LineChart';
 export type { PieSeriesOption } from './PieChart';
@@ -106,9 +103,6 @@ export type { MapSeriesOption } from './MapChart';
 export type { ThemeRiverSeriesOption } from './ThemeRiverChart';
 export type { CustomSeriesOption } from './CustomChart';
 
-// ============================================
-// Chart Creators
-// ============================================
 export { default as createBarChart } from './BarChart';
 export { default as createColumnChart } from './ColumnChart';
 export { default as createLineChart } from './LineChart';
@@ -143,9 +137,6 @@ export { default as createLinesMapChart } from './LinesMapChart';
 export { default as createThemeRiverChart } from './ThemeRiverChart';
 export { default as createCustomChart } from './CustomChart';
 
-// ============================================
-// Registry
-// ============================================
 import type { ChartType, ChartCreator } from './types';
 import createBarChart from './BarChart';
 import createColumnChart from './ColumnChart';

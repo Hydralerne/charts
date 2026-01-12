@@ -1,6 +1,6 @@
 import type { EChartsOption, LinesSeriesOption } from 'echarts';
 import { defaultAnimation } from './types';
-import { locationToCoordinate, toEChartsCoord } from './utils/mapDataTypes';
+import { locationToCoordinate, toEChartsCoord } from '../utils/mapDataTypes';
 
 export type { LinesSeriesOption };
 

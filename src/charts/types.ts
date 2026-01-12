@@ -184,7 +184,6 @@ export type ChartType =
   // Advanced
   | 'themeRiver'
   | 'custom';
-
 /**
  * Chart metadata for documentation
  */
@@ -212,3 +211,4 @@ export const chartCategories = {
   geographic: 'Geographic',
   advanced: 'Advanced',
 } as const;
+
