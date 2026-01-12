@@ -8,6 +8,9 @@
 import type { ChartType } from './types';
 import { ensureMapsInitialized } from '../utils/mapUtils';
 
+// Lazy import echarts-gl for 3D charts
+let echartsGLModule: any = null;
+
 /**
  * Chart types that require initialization before rendering
  */
@@ -27,12 +30,19 @@ interface ChartInitConfig {
  * Initialize echarts-gl for 3D charts
  */
 const initializeEChartsGL = async (): Promise<void> => {
+  if (echartsGLModule) {
+    return; // Already loaded
+  }
+  
   try {
-    // Dynamically import echarts-gl
-    await import('echarts-gl');
+    // Dynamically import echarts-gl - this registers 3D components with echarts
+    // The import side-effect registers the components automatically
+    // @ts-ignore - echarts-gl doesn't provide TypeScript definitions
+    echartsGLModule = await import('echarts-gl');
+    console.log('echarts-gl loaded successfully');
   } catch (error) {
     console.error('Failed to load echarts-gl:', error);
-    throw new Error('echarts-gl is required for 3D charts. Please install it: npm install echarts-gl');
+    throw new Error('echarts-gl is required for 3D charts. Install: npm install echarts-gl --legacy-peer-deps');
   }
 };
 
