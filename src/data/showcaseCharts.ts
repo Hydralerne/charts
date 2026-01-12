@@ -41,4 +41,7 @@ export const showcaseCharts: ShowcaseChart[] = [
   { type: 'gauge', dataKey: 'gauge' },
   { type: 'gradeGauge', dataKey: 'gradeGauge' },
   { type: 'bar3D', dataKey: 'products' },
+  { type: 'calendarHeatmap', dataKey: 'calendarData' },
+  { type: 'customBarTrend', dataKey: 'multiYearTrend' },
+  { type: 'scatterGL', dataKey: 'gpsPoints' },
 ];

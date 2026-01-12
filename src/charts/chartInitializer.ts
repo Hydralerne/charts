@@ -14,7 +14,7 @@ let echartsGLModule: any = null;
 /**
  * Chart types that require initialization before rendering
  */
-export type InitializableChartType = 'map' | 'scatterMap' | 'pieMap' | 'linesMap' | 'bar3D';
+export type InitializableChartType = 'map' | 'scatterMap' | 'pieMap' | 'linesMap' | 'bar3D' | 'scatterGL';
 
 /**
  * Configuration for chart initialization
@@ -69,6 +69,14 @@ const CHART_INIT_REGISTRY: Partial<Record<InitializableChartType, ChartInitConfi
   bar3D: {
     init: initializeEChartsGL,
     loadingMessage: 'Loading 3D rendering engine...',
+  },
+  scatterGL: {
+    init: async () => {
+      // ScatterGL requires both map and echarts-gl
+      await ensureMapsInitialized();
+      await initializeEChartsGL();
+    },
+    loadingMessage: 'Loading map and WebGL renderer...',
   },
 };
 

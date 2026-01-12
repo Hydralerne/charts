@@ -17,7 +17,7 @@ import ChartError from './ChartError';
 
 export interface ChartViewProps {
   type?: ChartType;
-  data: ChartData;
+  data: ChartData | any; // Allow any for complex charts with custom data structures
   timeXAxis?: boolean;
   timeYAxis?: boolean;
   numberFormat?: 'default' | 'comma' | 'abbreviated';

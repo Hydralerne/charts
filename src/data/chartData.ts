@@ -53,6 +53,55 @@ export const chartData = {
     labels: ['2026-02-01', '2026-02-02', '2026-02-04', '2026-02-12', '2026-02-15', '2026-02-28', '2026-03-15', '2026-04-01'],
     values: [820, 932, 901, 934, 1290, 1330, 1320, 1420],
   },
+  
+  // Data for Calendar Heatmap - year with date-value pairs
+  calendarData: {
+    labels: ['2026'], // Year(s) to display
+    values: [], // Will be generated but can be overridden
+  },
+  
+  // Data for Custom Bar Trend - multiple years comparison
+  multiYearTrend: {
+    labels: ['Category A', 'Category B', 'Category C', 'Category D', 'Category E', 'Category F', 'Category G', 'Category H'],
+    values: [
+      [450, 520, 380, 640, 590, 720, 480, 550], // 2019
+      [480, 550, 420, 680, 620, 760, 510, 580], // 2020
+      [510, 580, 450, 720, 650, 800, 540, 610], // 2021
+      [540, 610, 480, 760, 680, 840, 570, 640], // 2022
+      [570, 640, 510, 800, 710, 880, 600, 670], // 2023
+      [600, 670, 540, 840, 740, 920, 630, 700], // 2024
+      [630, 700, 570, 880, 770, 960, 660, 730], // 2025
+    ]
+  },
+  
+  // GPS data for ScatterGL - coordinates [lng, lat, value]
+  gpsPoints: {
+    labels: ['New York', 'London', 'Tokyo', 'Sydney', 'Paris', 'Dubai', 'Toronto', 'Singapore', 
+             'Los Angeles', 'Berlin', 'Mumbai', 'São Paulo', 'Mexico City', 'Cairo', 'Moscow',
+             'Beijing', 'Seoul', 'Bangkok', 'Istanbul', 'Buenos Aires'],
+    values: [
+      [-74.0060, 40.7128], // New York
+      [-0.1278, 51.5074],  // London
+      [139.6917, 35.6895], // Tokyo
+      [151.2093, -33.8688], // Sydney
+      [2.3522, 48.8566],   // Paris
+      [55.2708, 25.2048],  // Dubai
+      [-79.3832, 43.6532], // Toronto
+      [103.8198, 1.3521],  // Singapore
+      [-118.2437, 34.0522], // Los Angeles
+      [13.4050, 52.5200],  // Berlin
+      [72.8777, 19.0760],  // Mumbai
+      [-46.6333, -23.5505], // São Paulo
+      [-99.1332, 19.4326], // Mexico City
+      [31.2357, 30.0444],  // Cairo
+      [37.6173, 55.7558],  // Moscow
+      [116.4074, 39.9042], // Beijing
+      [126.9780, 37.5665], // Seoul
+      [100.5018, 13.7563], // Bangkok
+      [28.9784, 41.0082],  // Istanbul
+      [-58.3816, -34.6037], // Buenos Aires
+    ]
+  },
 };
 
 export type ChartDataKey = keyof typeof chartData;

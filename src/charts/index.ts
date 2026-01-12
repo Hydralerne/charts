@@ -104,7 +104,10 @@ export type { ParallelSeriesOption } from './ParallelChart';
 export type { MapSeriesOption } from './MapChart';
 export type { ThemeRiverSeriesOption } from './ThemeRiverChart';
 export type { CustomSeriesOption } from './CustomChart';
+export type { CalendarHeatmapSeriesOption } from './CalendarHeatmapChart';
+export type { CustomBarTrendSeriesOption } from './CustomBarTrendChart';
 export type { Bar3DSeriesOption } from './Bar3DChart';
+export type { ScatterGLSeriesOption } from './ScatterGLChart';
 
 export { default as createBarChart } from './BarChart';
 export { default as createColumnChart } from './ColumnChart';
@@ -141,7 +144,10 @@ export { default as createPieMapChart } from './PieMapChart';
 export { default as createLinesMapChart } from './LinesMapChart';
 export { default as createThemeRiverChart } from './ThemeRiverChart';
 export { default as createCustomChart } from './CustomChart';
+export { default as createCalendarHeatmapChart } from './CalendarHeatmapChart';
+export { default as createCustomBarTrendChart } from './CustomBarTrendChart';
 export { default as createBar3DChart } from './Bar3DChart';
+export { default as createScatterGLChart } from './ScatterGLChart';
 
 import type { ChartType, ChartCreator } from './types';
 import createBarChart from './BarChart';
@@ -179,7 +185,10 @@ import createPieMapChart from './PieMapChart';
 import createLinesMapChart from './LinesMapChart';
 import createThemeRiverChart from './ThemeRiverChart';
 import createCustomChart from './CustomChart';
+import createCalendarHeatmapChart from './CalendarHeatmapChart';
+import createCustomBarTrendChart from './CustomBarTrendChart';
 import createBar3DChart from './Bar3DChart';
+import createScatterGLChart from './ScatterGLChart';
 
 export const charts: Record<ChartType, ChartCreator> = {
   bar: createBarChart,
@@ -217,7 +226,10 @@ export const charts: Record<ChartType, ChartCreator> = {
   linesMap: createLinesMapChart as any,  // Special data format (routes)
   themeRiver: createThemeRiverChart,
   custom: createCustomChart,
+  calendarHeatmap: createCalendarHeatmapChart as any,  // Self-generating data
+  customBarTrend: createCustomBarTrendChart as any,  // Self-generating data
   bar3D: createBar3DChart,
+  scatterGL: createScatterGLChart as any,  // Self-generating data, requires echarts-gl
 };
 
 export { default } from './BarChart';

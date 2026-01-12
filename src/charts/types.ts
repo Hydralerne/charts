@@ -12,6 +12,15 @@ export interface ChartData {
 }
 
 /**
+ * Multi-dimensional data format for complex charts
+ * Used for charts like CustomBarTrend that need multiple series
+ */
+export interface MultiSeriesChartData {
+  labels: any[];
+  values: number[][];  // Array of series, each series is an array of values
+}
+
+/**
  * Extended data format for geographic/map charts
  */
 export interface MapChartData {
@@ -186,9 +195,12 @@ export type ChartType =
   // Advanced
   | 'themeRiver'
   | 'custom'
+  | 'calendarHeatmap'
+  | 'customBarTrend'
   
   // 3D Charts (requires echarts-gl)
-  | 'bar3D';
+  | 'bar3D'
+  | 'scatterGL';
 /**
  * Chart metadata for documentation
  */
